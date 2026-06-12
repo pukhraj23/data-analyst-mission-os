@@ -7,7 +7,8 @@ import type { Profile, SkillNode, Mission, CoachMessage } from '@/types'
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 })
-
+console.log('API KEY EXISTS:', !!process.env.ANTHROPIC_API_KEY)
+console.log('API KEY PREFIX:', process.env.ANTHROPIC_API_KEY?.substring(0, 15))
 // System prompt for the AI Coach
 function buildCoachSystemPrompt(
   profile: Profile,
@@ -218,7 +219,7 @@ Respond with ONLY valid JSON:
 Focus on what actually matters for passing interviews and doing real work. Be specific.`
 
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-3-5-sonnet-20241022',
     max_tokens: 512,
     messages: [{ role: 'user', content: prompt }],
   })
