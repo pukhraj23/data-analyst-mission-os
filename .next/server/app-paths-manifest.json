@@ -1,0 +1,9 @@
+{
+  "/auth/login/page": "app/auth/login/page.js",
+  "/career-gps/page": "app/career-gps/page.js",
+  "/interviews/page": "app/interviews/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/sprint/page": "app/sprint/page.js",
+  "/missions/page": "app/missions/page.js",
+  "/settings/page": "app/settings/page.js"
+}

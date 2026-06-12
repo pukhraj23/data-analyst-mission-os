@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 95%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 191 100% 50%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 85%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 222 30% 14%;
+    --accent-foreground: 210 40% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 30% 16%;
+    --input: 222 30% 14%;
+    --ring: 191 100% 50%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[#0A0F1E] text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0F1E;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1E2D45;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00D4FF44;
+  }
+}
+
+@layer components {
+  /* Mission Card */
+  .mission-card {
+    @apply bg-[#111827] border border-[#1E2D45] rounded-lg;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, #111827 100%);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .mission-card:hover {
+    @apply border-[#00D4FF33];
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* Status indicators */
+  .status-active {
+    @apply bg-cyan-glow border border-[#00D4FF44] text-[#00D4FF];
+  }
+
+  .status-locked {
+    @apply bg-gray-900 border border-gray-800 text-gray-600;
+  }
+
+  .status-completed {
+    @apply bg-phosphor-glow border border-[#39FF1444] text-[#39FF14];
+  }
+
+  .status-available {
+    @apply bg-amber-500/10 border border-amber-500/30 text-amber-400;
+  }
+
+  /* XP Gain animation overlay */
+  .xp-gain-toast {
+    @apply fixed pointer-events-none font-mono font-bold text-[#39FF14] text-lg;
+    animation: xp-flash 1.2s ease-out forwards;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+    z-index: 9999;
+  }
+
+  /* Grid background for mission areas */
+  .mission-grid-bg {
+    background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Cyan glow text */
+  .text-cyan-glow {
+    color: #00D4FF;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Phosphor glow text */
+  .text-phosphor-glow {
+    color: #39FF14;
+    text-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+  }
+
+  /* Skill tree node states */
+  .skill-node-locked {
+    @apply opacity-40 cursor-not-allowed;
+    filter: grayscale(100%);
+  }
+
+  .skill-node-available {
+    @apply cursor-pointer transition-all duration-200;
+    animation: pulse-cyan 3s ease-in-out infinite;
+  }
+
+  .skill-node-in-progress {
+    @apply cursor-pointer;
+    border-color: #00D4FF;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+  }
+
+  .skill-node-completed {
+    border-color: #39FF14;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+  }
+
+  .skill-node-mastered {
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.15) 0%, rgba(0, 212, 255, 0.15) 100%);
+    border-color: #39FF14;
+    box-shadow: 0 0 16px rgba(57, 255, 20, 0.5);
+  }
+
+  /* Progress bar glows */
+  .progress-cyan {
+    background: linear-gradient(90deg, #0099BB, #00D4FF);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+  }
+
+  .progress-phosphor {
+    background: linear-gradient(90deg, #22BB00, #39FF14);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+  }
+
+  /* Terminal-style code blocks */
+  .terminal-block {
+    @apply bg-[#080E1A] border border-[#1E2D45] rounded-md p-4 font-mono text-sm;
+    color: #00D4FF;
+  }
+
+  /* Badge/achievement */
+  .achievement-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium font-mono;
+  }
+
+  /* Focus mode overlay */
+  .focus-mode-active {
+    @apply fixed inset-0 bg-[#0A0F1E] z-50;
+  }
+
+  /* Readiness meter */
+  .readiness-ring {
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+  }
+
+  /* ROI badge */
+  .roi-badge {
+    @apply font-mono text-xs px-2 py-0.5 rounded;
+  }
+
+  .roi-high {
+    @apply bg-phosphor-glow text-[#39FF14] border border-[#39FF1444];
+  }
+
+  .roi-medium {
+    @apply bg-amber-500/10 text-amber-400 border border-amber-500/30;
+  }
+
+  .roi-low {
+    @apply bg-red-500/10 text-red-400 border border-red-500/30;
+  }
+}
+
+/* Animations */
+@keyframes xp-flash {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  30% { opacity: 1; transform: translateY(-20px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(0, 212, 255, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
