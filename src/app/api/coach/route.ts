@@ -16,8 +16,7 @@ export async function POST(request: NextRequest) {
     const { message } = body
     return NextResponse.json({
       data: {
-        response: `Great question! For personalised coaching, use Claude directly at claude.ai — your subscription is already active there. Ask: "${message}"`,
-        conversationId: null
+        response:  `For personalised coaching, use Claude directly at claude.ai — it's free to use. Ask: "${message}"        conversationId: null`Great question! For
       },
       success: true
     })
