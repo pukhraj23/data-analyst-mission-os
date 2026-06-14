@@ -168,11 +168,14 @@ export function generateDailyMission(input: MissionGenerationInput): GeneratedMi
   const { profile, skillProgress, skillNodes, existingMissions } = input
 
   // Check for active missions that aren't completed
-  const activeMission = existingMissions.find(m =>
-    m.status === 'active' || m.status === 'pending'
-  )
+  const today = new Date().toISOString().split('T')[0]
 
-  if (activeMission) return null // Don't generate if there's an active mission
+const activeMission = existingMissions.find(m =>
+  (m.status === 'active' || m.status === 'pending') &&
+  (m as any).scheduled_date === today
+)
+
+if (activeMission) return null
 
   // Get the next priority skill
   const nextSkill = getNextPrioritySkill(skillProgress, skillNodes, profile.sprint_mode_enabled)
